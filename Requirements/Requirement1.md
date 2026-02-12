@@ -26,7 +26,7 @@ export interface AttrPattern<T = any> {
    * Property name on the spawned class instance to map to
    * Use '.' to map to the root object
    */
-  mapsTo: '.' | keyof T;
+  mapsTo: '.' | keyof T | `?.${pathString}` | `!delete ${pathString}`;
   
   /**
    * Optional parser function to transform attribute string value
