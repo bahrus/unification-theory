@@ -11,7 +11,7 @@ interface AttrConfig<T = any> {
      * Property name on the spawned class instance to map to
      * "." means do an assign-gingerly into the entire spawned class
      */
-    mapsTo: '.' | keyof T;
+    mapsTo?: '.' | keyof T;
     
     /**
      * Custom parser function to transform attribute string value
