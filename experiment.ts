@@ -1,7 +1,7 @@
 /**
  * Base interface for attribute pattern configuration
  */
-interface AttrPattern<T = any> {
+interface AttrConfig<T = any> {
     /**
      * Type hint for parsing the attribute value
      */
@@ -65,13 +65,13 @@ interface AttrPatterns<T = any> {
     /**
      * Configuration for the base attribute
      */
-    _base: AttrPattern<T>;
+    _base: AttrConfig<T>;
     
     /**
      * User-defined attribute patterns
      * Each property 'x' should have a corresponding '_x' config
      */
-    [key: string]: string | AttrPattern<T>;
+    [key: string]: string | AttrConfig<T>;
 }
 
 /**
@@ -129,9 +129,9 @@ class MyEnhancement {
 // Alternative approach: Use a more flexible Record type
 type FlexibleAttrPatterns<T = any> = {
     base: string;
-    _base: AttrPattern<T>;
+    _base: AttrConfig<T>;
 } & {
-    [K: string]: string | AttrPattern<T>;
+    [K: string]: string | AttrConfig<T>;
 };
 
 // Example with explicit typing for better IDE support

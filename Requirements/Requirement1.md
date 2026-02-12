@@ -15,7 +15,7 @@ Currently, mount-observer's `MountInit` interface has `whereAttr?: WhereAttr` an
 ### Core Interfaces
 
 ```typescript
-export interface AttrPattern<T = any> {
+export interface AttrConfig<T = any> {
   /**
    * Type of the property value (JSON-serializable string format)
    */
@@ -49,14 +49,14 @@ export interface AttrPatterns<T = any> {
   /**
    * Configuration for the base pattern
    */
-  _base: AttrPattern<T>;
+  _base: AttrConfig<T>;
   
   /**
    * User-defined patterns:
    * - Keys without underscore: template strings (e.g., '${base}:hello')
    * - Keys with underscore: configuration objects (e.g., _a: { instanceOf: 'String', mapsTo: 'hello' })
    */
-  [key: string]: string | AttrPattern<T>;
+  [key: string]: string | AttrConfig<T>;
 }
 ```
 
