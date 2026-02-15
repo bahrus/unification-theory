@@ -38,11 +38,11 @@ Rename properties in `MountInit`:
 ```typescript
 export interface MountInit {
   // OLD → NEW
-  whereElementMatches → withElementMatches
+  whereElementMatches → withMatching
   whereAttr → withAttrs  
-  whereInstanceOf → withInstanceOf
-  whereMediaMatches → withMediaMatches
-  whereOutside → withOutside
+  whereInstanceOf → withInstances
+  whereMediaMatches → withMediaMatching
+  whereOutside → butOutside
   
   // Keep as-is
   import?: string | ImportSpec | Array<string | ImportSpec>;
@@ -225,11 +225,11 @@ function mountInitToRegistryItem(
 **Solution**: Rename in MountInit
 ```typescript
 export interface MountInit extends Partial<IBaseRegistryItem> {
-  withElementMatches: string;
+  withMatching: string;
   withAttrs?: WithAttrs;  // Different from IBaseRegistryItem.withAttrs
-  withInstanceOf?: Constructor | Constructor[];
-  withMediaMatches?: string | MediaQueryList;
-  withOutside?: string;
+  withInstances?: Constructor | Constructor[];
+  withMediaMatching?: string | MediaQueryList;
+  outside?: string;
   
   // Rename to avoid conflict
   attrMap?: MapConfig;  // Was: map
@@ -311,13 +311,13 @@ Examples to create:
 Provide a codemod or find/replace guide:
 ```typescript
 // Find: whereElementMatches
-// Replace: withElementMatches
+// Replace: withMatching
 
 // Find: whereAttr
 // Replace: withAttrs
 
 // Find: whereInstanceOf
-// Replace: withInstanceOf
+// Replace: withInstances
 
 // etc.
 ```
