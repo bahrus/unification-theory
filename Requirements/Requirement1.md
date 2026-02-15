@@ -1,7 +1,7 @@
-# Requirement 1: Add Declarative Attribute Patterns to IBaseRegistryItem
+# Requirement 1: Add Declarative Attribute Patterns to EnhancementConfig
 
 ## Goal
-Extend `IBaseRegistryItem` in assign-gingerly to support declarative attribute mapping with TypeScript type safety, template interpolation, and JSON serialization support.
+Extend `EnhancementConfig` in assign-gingerly to support declarative attribute mapping with TypeScript type safety, template interpolation, and JSON serialization support.
 
 ## Background
 Currently, mount-observer's `MountInit` interface has `whereAttr?: WhereAttr` and `map?: MapConfig` for declarative attribute observation and mapping. We need to add similar capability to assign-gingerly's `IBaseRegistryItem`, but with:
@@ -60,10 +60,10 @@ export interface AttrPatterns<T = any> {
 }
 ```
 
-### Extend IBaseRegistryItem
+### Extend EnhancementConfig
 
 ```typescript
-export interface IBaseRegistryItem<T = any> {
+export interface EnhancementConfig<T = any> {
   spawn: { new (oElement?: Element, ctx?: any, initVals?: Partial<T>): T };
   map: { [key: string | symbol]: keyof T };
   enhKey?: string;
@@ -102,7 +102,7 @@ const patterns = createAttrPatterns({
   _b: { instanceOf: 'Boolean', mapsTo: 'wellBeing' }
 });
 
-const registryItem: IBaseRegistryItem<GreetingEnhancement> = {
+const registryItem: EnhancementConfig<GreetingEnhancement> = {
   spawn: GreetingEnhancement,
   map: {},
   enhKey: 'greeting',
@@ -164,7 +164,7 @@ Support both formats transparently:
 
 ```typescript
 function normalizeAttrPatterns<T>(
-  patterns: IBaseRegistryItem<T>['attrPatterns']
+  patterns: EnhancementConfig<T>['attrPatterns']
 ): Array<{...}> {
   if (!patterns) return [];
   if (Array.isArray(patterns)) return patterns;
